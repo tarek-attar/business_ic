@@ -19,7 +19,7 @@ class CheckUserRole
     public function handle(Request $request, Closure $next)
     {
         if (Auth::user()->role == 'admin') {
-            return redirect('/admin');
+            return redirect('/admin/dashbord');
         }
         return $next($request);
     }

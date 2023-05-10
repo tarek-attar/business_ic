@@ -102,7 +102,7 @@ class ChatController extends Controller
             $newParticipant->save();
         }
 
-        return 'you creat new chat room';
+        return $newRoom;
     }
 
     public function addParticipant(Request $request)

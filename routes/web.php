@@ -61,7 +61,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     // روابط اللوحة
 
     Route::prefix('admin')->name('admin.')->middleware('auth', 'check_user')->group(function () {
-        Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::get('/dashbord', [AdminController::class, 'index'])->name('index');
         Route::resource('categories', CategoryController::class);
         Route::resource('jobs', JobController::class);
         Route::resource('chats', ChatMessageTextController::class);
