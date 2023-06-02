@@ -21,7 +21,7 @@ class ChatController extends Controller
     } */
     public function rooms(Request $request)
     {
-        $user =  Auth::id();
+        /* $user =  Auth::id();
         $publicChat = ChatRoom::where('type', 'public')->get();
 
         $rooms = Participant::where('user_id', $user)->select('chat_room_id')->get();
@@ -31,7 +31,29 @@ class ChatController extends Controller
 
         $chatRooms = $publicChat->merge($privetChat);
 
+        return $chatRooms; */
+        // تجلب رقم المستخدم
+        $user_id =  Auth::id();
+        $user_role = User::where('id', $user_id)->pluck('role')->first();
+        //تجلب كل الغرف العامة
+        $publicChat = ChatRoom::where('type', 'public')->get();
+        // تجلب أرقام الغرف التي يتواجد فيها المستخدم من جدول المشاركين
+        $rooms = Participant::where('user_id', $user_id)->select('chat_room_id')->get();
+        $roomIds = $rooms->pluck('chat_room_id')->toArray();
+        //تجلب الغرف من جدول الغرف
+        $privetChat = ChatRoom::whereIn('id', $roomIds)->get();
+        // اذا كان المستخدم ادمن او سوبر ادمن اجلب له غرف الدعم الفني
+        if ($user_role == 'admin' || $user_role == 'superadmin') {
+            // دمج كل الغرف العامة والدعم الفني والخاصة
+            $technical_support = ChatRoom::where('type', 'technical support')->get();
+            $allChatRooms = $publicChat->merge($technical_support);
+            $chatRooms = $allChatRooms->merge($privetChat);
+        } else {
+            // دمج الغرف العامة مع الخاصة
+            $chatRooms = $publicChat->merge($privetChat);
+        }
         return $chatRooms;
+        //return response()->json($chatRooms);
     }
     /* public function rooms(Request $request)
     {

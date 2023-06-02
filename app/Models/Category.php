@@ -27,4 +27,9 @@ class Category extends Model
     {
         return $this->belongsToMany(Job::class);
     }
+
+    public function freelancer_services()
+    {
+        return $this->hasMany(Freelancer_service::class);
+    }
 }

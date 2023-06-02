@@ -2,8 +2,10 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\API_CheckUserRole;
 use App\Http\Middleware\CheckUserType;
 use App\Http\Middleware\CheckUserRole;
+use App\Http\Middleware\API_PASSWORD;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -43,7 +45,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
@@ -70,6 +72,9 @@ class Kernel extends HttpKernel
 
         'check_user' => CheckUserType::class,
         'check_role' => CheckUserRole::class,
+
+        'check_password' => API_PASSWORD::class,
+        'api_check_role' => API_CheckUserRole::class,
 
         'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
         'localizationRedirect'    => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,

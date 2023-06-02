@@ -14,8 +14,8 @@ class Participant extends Model
         'role',
     ];
 
-    /*  public function chatRoom()
+    public function chatRoom()
     {
         return $this->belongsTo(ChatRoom::class);
-    } */
+    }
 }

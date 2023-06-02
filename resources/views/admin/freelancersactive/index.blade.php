@@ -22,7 +22,7 @@
             <th>{{ __('site.Name') }}</th>
             <th>{{ __('site.Phone Number') }}</th>
             <th>{{ __('site.Email') }}</th>
-            <th>{{ __('site.Service') }}</th>
+            {{-- <th>{{ __('site.Service') }}</th> --}}
             <th>{{ __('site.Address') }}</th>
             <th>{{ __('site.Notic') }}</th>
             <th>{{ __('site.Status') }}</th>
@@ -38,7 +38,7 @@
                 <td>{{ $freelancer->user->name }}</td>
                 <td>{{ $freelancer->user->phone_number }}</td>
                 <td>{{ $freelancer->user->email }}</td>
-                <td>{{ $freelancer->category->name_ar }}-{{ $freelancer->category->name_en }}</td>
+                {{-- <td>{{ $freelancer->category->name_ar }}-{{ $freelancer->category->name_en }}</td> --}}
                 <td>{{ $freelancer->address }}</td>
                 <td>{{ $freelancer->user->notic }}</td>
                 <td>

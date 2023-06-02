@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Freelancer;
 use App\Models\Freelancer_id;
+use App\Models\Freelancer_service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -100,7 +101,11 @@ class UserController extends Controller
                     'user_id' => $userID,
                     'status' => $request->status,
                     'address' => $request->address,
-                    'category_id' => $request->category_id,
+                    //'category_id' => $request->category_id,
+                ]);
+                Freelancer_service::create([
+                    'user_id' => $userID,
+                    'category_id' =>  $request->category_id,
                 ]);
                 if ($request->hasFile('image')) {
                     foreach ($request->file('image') as $file) {

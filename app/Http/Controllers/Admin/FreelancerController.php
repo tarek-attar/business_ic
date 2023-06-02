@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Freelancer_id;
+use App\Models\Freelancer_service;
 use App\Models\User;
 use Illuminate\Support\Facades\File;
 
@@ -28,8 +29,10 @@ class FreelancerController extends Controller
     {
         $freelancer = Freelancer::findOrFail($id);
         $categories = Category::all();
+        $freelanser_services = Freelancer_service::where('user_id', $freelancer->user_id)->get();
+
         $images = Freelancer_id::where('user_id', $freelancer->user_id)->get();
-        return view('admin.freelancers.show', compact('freelancer', 'categories', 'images'));
+        return view('admin.freelancers.show', compact('freelancer', 'categories', 'images', 'freelanser_services'));
         //dd($images);
     }
 
@@ -131,6 +134,11 @@ class FreelancerController extends Controller
             'address' => $request->address,
             'status' => $request->status,
         ]);
+        Freelancer_service::where('user_id', $freelancer->user_id)->delete();
+        Freelancer_service::create([
+            'user_id' => $freelancer->user_id,
+            'category_id' => $request->category_id,
+        ]);
 
         $selectedCheckboxes = $request->input('deleteFile');
         if ($selectedCheckboxes) {
@@ -153,6 +161,19 @@ class FreelancerController extends Controller
 
     public function destroy($id)
     {
+        $freelancer_user = Freelancer::findOrFail($id);
+        // للتعديل على المستخدم
+        $user = User::findOrFail($freelancer_user->user_id);
+        $user->update([
+            'role' => 'user',
+        ]);
+        // لحذف خدمات المستخدم
+        /* $freelancer_service = Freelancer_service::where('user_id', $freelancer_user->user_id);
+        foreach ($freelancer_service as  $freelancer_services) {
+            Freelancer_service::delete();
+        } */
+        Freelancer_service::where('user_id', $freelancer_user->user_id)->delete();
+
         $freelancer = Freelancer::findOrFail($id);
         $freelancerFiles = Freelancer_id::where('user_id', $freelancer->user_id)->get();
         foreach ($freelancerFiles as $item) {

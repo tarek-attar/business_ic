@@ -12,7 +12,7 @@ class Freelancer_service extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'user_id',
-        'service',
+        'category_id',
     ];
 
     public function user()
@@ -22,5 +22,9 @@ class Freelancer_service extends Model
     public function freelancer()
     {
         return $this->belongsTo(Freelancer::class)->withDefault();
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class)->withDefault();
     }
 }

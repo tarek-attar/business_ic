@@ -26,10 +26,17 @@
         <label for="">{{ __('site.Email') }}</label>
         <input readonly type="text" name="email" value="{{ $freelancer->user->email }}" class="form-control">
     </div>
-    <div class="mb-3">
+    {{-- <div class="mb-3">
         <label for="">{{ __('site.Service') }}</label>
         <input readonly type="text" name="email"
             value="{{ $freelancer->category->name_ar }} - {{ $freelancer->category->name_en }}" class="form-control">
+    </div> --}}
+    <div class="mb-3">
+        <label for="">{{ __('site.Service') }}</label>
+        @foreach ($freelanser_services as $services)
+            <input readonly type="text" name="service"
+                value="{{ $services->category->name_ar }} - {{ $services->category->name_en }}" class="form-control">
+        @endforeach
     </div>
     <div class="mb-3">
         <label for="">{{ __('site.Address') }}</label>

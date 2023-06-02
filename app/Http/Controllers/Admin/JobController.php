@@ -163,6 +163,6 @@ class JobController extends Controller
         foreach ($jobFiles as $item) {
             $item->delete();
         };
-        return redirect()->route('admin.jobs.index')->with('msg', 'Category deleted successfully')->with('type', 'danger');
+        return redirect()->route('admin.jobs.index')->with('msg', 'Job deleted successfully')->with('type', 'danger');
     }
 }

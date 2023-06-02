@@ -13,7 +13,7 @@ class Freelancer extends Model
     protected $fillable = [
         'user_id',
         'status',
-        'category_id',
+        //'category_id',
         'address',
     ];
 
