@@ -74,7 +74,8 @@ class Api_UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'numeric', 'min:10'],
             'password' => ['required', 'min:8'],
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'user_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'id_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         if ($validator->fails()) {
             $response = [
@@ -94,12 +95,21 @@ class Api_UserController extends Controller
 
         if ($request->hasFile('id_image')) {
             $file = $request->file('id_image');
-            $filename = rand() . time() . '_' . $file->getClientOriginalName();
+            $filename = 'id_image' . '_' . rand() . time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('uploads/user'), $filename);
             $user->update([
                 'id_image' => $filename,
             ]);
         }
+        if ($request->hasFile('user_image')) {
+            $file = $request->file('user_image');
+            $filename = 'user_image' . '_' . rand() . time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/user'), $filename);
+            $user->update([
+                'user_image' => $filename,
+            ]);
+        }
+
         $response = [
             'status' => true,
             'message' => 'User created successfully',
@@ -111,12 +121,21 @@ class Api_UserController extends Controller
     // id will come from auth user
     public function updateUser(Request $request)
     {
+        $user = User::where('id', $request->user_id)->first();
+        if (!$user) {
+            $response = [
+                'status' => false,
+                'message' => 'user dose not exists',
+            ];
+            return response()->json($response, 400);
+        }
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'numeric', 'min:10'],
             'password' => ['required', 'min:8'],
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'user_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'id_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         if ($validator->fails()) {
             $response = [
@@ -126,7 +145,6 @@ class Api_UserController extends Controller
             return response()->json($response, 400);
         }
 
-        $user = User::findOrFail(Auth::id());
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -140,6 +158,14 @@ class Api_UserController extends Controller
             $file->move(public_path('uploads/user'), $filename);
             $user->update([
                 'id_image' => $filename,
+            ]);
+        }
+        if ($request->hasFile('user_image')) {
+            $file = $request->file('user_image');
+            $filename = rand() . time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/user'), $filename);
+            $user->update([
+                'user_image' => $filename,
             ]);
         }
         $response = [

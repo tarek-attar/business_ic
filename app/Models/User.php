@@ -30,9 +30,10 @@ class User extends Authenticatable
         'password',
         'phone_number',
         'role',
+        'user_image',
+        'id_image',
         'notic',
         'api_token',
-        'id_image',
     ];
 
     /**
