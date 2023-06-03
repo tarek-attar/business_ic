@@ -73,24 +73,26 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::middleware('auth:sanctum', 'check_password')->group(function () {
 
     Route::post('job', [Api_JobController::class, 'index']);
+    Route::post('getOneJob', [Api_JobController::class, 'getOneJob']);
     Route::post('job/createJop', [Api_JobController::class, 'createJop']);
     Route::post('job/updateJop/{id}', [Api_JobController::class, 'updateJop']);
-    Route::delete('job/destroyJop/{id}', [Api_JobController::class, 'destroyJop']);
+    Route::delete('job/destroyJop/{id}', [Api_JobController::class, 'destroy']);
 
     Route::post('user', [Api_UserController::class, 'index']);
     Route::post('admin', [Api_UserController::class, 'admin']);
+    Route::post('getOneUser', [Api_UserController::class, 'getOneUser']);
     Route::post('user/createUser', [Api_UserController::class, 'createUser']);
-    Route::post('user/updateUser/{id}', [Api_UserController::class, 'updateUser']);
+    Route::post('user/updateUser', [Api_UserController::class, 'updateUser']);
     Route::delete('user/destroyUser/{id}', [Api_UserController::class, 'destroyUser']);
+    Route::post('new_freelancer/{id}', [Api_UserController::class, 'new_freelancer']);
 
     Route::post('category', [Api_CategoryController::class, 'index'])->middleware('api_check_role');
     Route::post('category/createCategory', [Api_CategoryController::class, 'createCategory'])->middleware('api_check_role');
     Route::post('category/updateCategory/{id}', [Api_CategoryController::class, 'updateCategory'])->middleware('api_check_role');
     Route::delete('category/destroyCategory/{id}', [Api_CategoryController::class, 'destroyCategory'])->middleware('api_check_role');
 
-    Route::post('new_freelancer/{id}', [Api_UserController::class, 'new_freelancer']);
-
     Route::post('gallery', [Api_GalleryController::class, 'index']);
+    Route::post('getOneGallery', [Api_GalleryController::class, 'getOneGallery']);
     Route::post('gallery/createGallery', [Api_GalleryController::class, 'createGallery']);
     Route::post('gallery/updateGallery/{id}', [Api_GalleryController::class, 'updateGallery']);
     Route::delete('gallery/destroyGallery/{id}', [Api_GalleryController::class, 'destroyGallery']);

@@ -18,16 +18,17 @@ class API_PASSWORD
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->input('api_password') !== env('API_PASSWORD', 'fdwfeasdfewfsafwef23243f43')) {
+        //return response()->json();
+        if ($request->api_password != 'fdwfeasdfewfsafwef23243f43') {
             return response()->json(['message' => 'Unauthenticated.']);
         }
-        if ($request->method() === 'DELETE') {
+        /* if ($request->method() === 'DELETE') {
             // Check if API token matches the expected value
             $apiPassword = $request->input('api_password');
             if ($apiPassword !== env('API_PASSWORD', 'fdwfeasdfewfsafwef23243f43')) {
                 return response()->json(['message' => 'Something wrong.'], 400);
             }
-        }
+        } */
         return $next($request);
     }
 }

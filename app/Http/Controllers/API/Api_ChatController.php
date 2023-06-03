@@ -52,7 +52,12 @@ class Api_ChatController extends Controller
         }
 
         //return $chatRooms;
-        return response()->json($allChatRooms);
+        $response = [
+            'status' => true,
+            'message' => 'you get all rooms',
+            'data' => $allChatRooms
+        ];
+        return response()->json($response, 200);
     }
     /* public function rooms(Request $request)
     {
@@ -164,8 +169,12 @@ class Api_ChatController extends Controller
             'user_id' => Auth::id(),
             'role' => 'admin',
         ]);
-
-        return response()->json('you creat new chat room successfully');
+        $response = [
+            'status' => true,
+            'message' => 'you creat new chat room successfully',
+            'data' => []
+        ];
+        return response()->json($response, 200);
     }
 
     public function addParticipant(Request $request)
@@ -178,7 +187,12 @@ class Api_ChatController extends Controller
             ->first();
 
         if ($existingParticipant) {
-            return response()->json('user already exists');
+            $response = [
+                'status' => false,
+                'message' => 'user already exists',
+                'data' => []
+            ];
+            return response()->json($response, 400);
         }
 
         $newParticipant = Participant::create([
@@ -186,8 +200,12 @@ class Api_ChatController extends Controller
             'user_id' => $request->user_id,
             'role' => 'member',
         ]);
-
-        return response()->json('added new user successfully');
+        $response = [
+            'status' => true,
+            'message' => 'added new user successfully',
+            'data' => []
+        ];
+        return response()->json($response, 200);
     }
 
     public function removeParticipant(Request $request)
@@ -200,14 +218,24 @@ class Api_ChatController extends Controller
             ->first();
 
         if (!$existingParticipant) {
-            return response()->json('user not exists');
+            $response = [
+                'status' => false,
+                'message' => 'user not exists',
+                'data' => []
+            ];
+            return response()->json($response, 400);
         }
 
         $Participant = Participant::where('chat_room_id', $request->room_id)
             ->where('user_id', $request->user_id)->first();
         $Participant->delete();
 
-        return response()->json('delete user successfully');
+        $response = [
+            'status' => true,
+            'message' => 'delete user successfully',
+            'data' => []
+        ];
+        return response()->json($response, 200);
     }
 
     // هنا حصل تعديل وجعلت رقم الغرفة ياتي من خلال الريكويست
@@ -285,8 +313,12 @@ class Api_ChatController extends Controller
 
         broadcast(new NewChatMessage($newMessage, $newMessageRecipient))->toOthers();
 
-
-        return response()->json($newMessage);
+        $response = [
+            'status' => true,
+            'message' => 'new message sent',
+            'data' => $newMessage
+        ];
+        return response()->json($response, 200);
     }
     public function readAt(Request $request, $roomId)
     {
@@ -297,8 +329,11 @@ class Api_ChatController extends Controller
             $readMessage->update();
         }
 
-        //return 'message update';
-        return 'user read message';
-        //return $readMessages;
+        $response = [
+            'status' => true,
+            'message' => 'user read message',
+            'data' => []
+        ];
+        return response()->json($response, 200);
     }
 }

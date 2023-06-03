@@ -19,7 +19,42 @@ class Api_GalleryController extends Controller
     public function index()
     {
         $gallery = Gallery::all();
-        return response()->json($gallery);
+        //return response()->json($gallery);
+        $response = [
+            'status' => true,
+            'message' => 'you get all Galleries successfully',
+            'data' => $gallery
+        ];
+        return response()->json($response, 200);
+    }
+    public function getOneGallery(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $response = [
+                'status' => false,
+                'message' => $validator->errors(),
+                'data' => []
+            ];
+            return response()->json($response, 400);
+        }
+        $gallery = Gallery::where('id', $request->id)->first();
+        if (!$gallery) {
+            $response = [
+                'status' => false,
+                'message' => 'this gallery dose not exists',
+                'data' => []
+            ];
+            return response()->json($response, 400);
+        }
+        $response = [
+            'status' => true,
+            'message' => 'you get a one gallery successfully',
+            'data' => $gallery
+        ];
+        return response()->json($response, 200);
     }
 
     public function createGallery(Request $request)
@@ -67,12 +102,42 @@ class Api_GalleryController extends Controller
                 ]);
             }
         }
-        return response()->json('Gallery created successfully');
+        $response = [
+            'status' => true,
+            'message' => 'Gallery created successfully',
+            'data' => []
+        ];
+        return response()->json($response, 200);
     }
 
     public function updateGallery(Request $request, $id)
     {
-        $gallery = Gallery::findOrFail($id);
+        $gallery = Gallery::where('id', $id)->first();
+        if (!$gallery) {
+            $response = [
+                'status' => false,
+                'message' => 'the gallery dose not exist',
+                'data' => []
+            ];
+            return response()->json($response, 400);
+        }
+
+        $selectedCheckboxes = $request->input('deleteFile'); // id of image in table job_file
+        if ($selectedCheckboxes) {
+            foreach ($selectedCheckboxes as $value) {
+                $idFilesDelete = Gallery_image::where('id', $value)->first();
+                if (!$idFilesDelete) {
+                    $response = [
+                        'status' => true,
+                        'message' => "this file with id:$value dose not exists",
+                        'data' => []
+                    ];
+                    return response()->json($response, 200);
+                }
+                File::delete(public_path('uploads/gallery/' . $idFilesDelete->file_name));
+                $idFilesDelete->delete();
+            };
+        }
         //$gallery_image = $gallery->gallery_images;
 
         // ان اردت استخراج ارري معين من الكوليكشن  حسب شرط معين
@@ -117,14 +182,7 @@ class Api_GalleryController extends Controller
             }
         }
 
-        $selectedCheckboxes = $request->input('deleteFile'); // id of image in table job_files
-        if ($selectedCheckboxes) {
-            foreach ($selectedCheckboxes as $value) {
-                $idFilesDelete = Gallery_image::findOrFail($value);
-                File::delete(public_path('uploads/gallery/' . $idFilesDelete->file_name));
-                $idFilesDelete->delete();
-            };
-        }
+
 
         /* $minimizedPictureDelete = $gallery->minimized_picture;
         File::delete(public_path('uploads/gallery/' . $minimizedPictureDelete)); */
@@ -139,7 +197,12 @@ class Api_GalleryController extends Controller
                 'minimized_picture' => $filename,
             ]);
         }
-        return response()->json('Gallery updated successfully');
+        $response = [
+            'status' => true,
+            'message' => 'Gallery updated successfully',
+            'data' => []
+        ];
+        return response()->json($response, 200);
     }
 
     public function destroyGallery(Request $request, $id)
@@ -147,9 +210,22 @@ class Api_GalleryController extends Controller
         /* $gallery = Gallery::findOrFail($id);
         $galleryImage = $gallery->gallery_images;
         $galleryImage->delete(); */
-        $gallery = Gallery::findOrFail($id);
+        $gallery = Gallery::where('id', $id)->first();
+        if (!$gallery) {
+            $response = [
+                'status' => false,
+                'message' => 'the gallery dose not exist',
+                'data' => []
+            ];
+            return response()->json($response, 400);
+        }
         $gallery->gallery_images()->delete();
         $gallery->delete();
-        return response()->json('Gallery deleted successfully');
+        $response = [
+            'status' => true,
+            'message' => 'Gallery deleted successfully',
+            'data' => []
+        ];
+        return response()->json($response, 200);
     }
 }

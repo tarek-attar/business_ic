@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class Api_CategoryController extends Controller
 {
@@ -16,7 +17,12 @@ class Api_CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return response()->json($categories);
+        $response = [
+            'status' => true,
+            'message' => 'you get all category successfully',
+            'data' => $categories
+        ];
+        return response()->json($response);
     }
 
     /**
@@ -27,18 +33,29 @@ class Api_CategoryController extends Controller
      */
     public function createCategory(Request $request)
     {
-        $request->validate([
-            'name_en' => 'required',
-            'name_ar' => 'required',
+        $validator = Validator::make($request->all(), [
+            'name_en' => 'required|unique:categories',
+            'name_ar' => 'required|unique:categories',
         ]);
+        if ($validator->fails()) {
+            $response = [
+                'status' => false,
+                'message' => $validator->errors(),
+            ];
+            return response()->json($response, 400);
+        }
 
-        Category::create([
+        $category = Category::create([
             'name_en' => $request->name_en,
             'name_ar' => $request->name_ar,
             'notic' => $request->notic,
         ]);
-
-        return response()->json('Category created successfully');
+        $response = [
+            'status' => true,
+            'message' => 'Category created successfully',
+            'data' => $category
+        ];
+        return response()->json($response);
     }
 
     /**
@@ -50,20 +67,31 @@ class Api_CategoryController extends Controller
      */
     public function updateCategory(Request $request, $id)
     {
-        $request->validate([
-            'name_en' => 'required',
-            'name_ar' => 'required',
+        $validator = Validator::make($request->all(), [
+            'name_en' => 'required|unique:categories',
+            'name_ar' => 'required|unique:categories',
         ]);
+        if ($validator->fails()) {
+            $response = [
+                'status' => false,
+                'message' => $validator->errors(),
+            ];
+            return response()->json($response, 400);
+        }
 
-        $category = Category::findOrFail($id);
+        $category = Category::where('id', $id)->first();
 
         $category->update([
             'name_en' => $request->name_en,
             'name_ar' => $request->name_ar,
             'notic' => $request->notic,
         ]);
-
-        return response()->json('Category updated successfully');
+        $response = [
+            'status' => true,
+            'message' => 'Category updated successfully',
+            'data' => []
+        ];
+        return response()->json($response);
     }
 
     /**
@@ -74,8 +102,21 @@ class Api_CategoryController extends Controller
      */
     public function destroyCategory($id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::where('id', $id)->first();
+        if (!$category) {
+            $response = [
+                'status' => false,
+                'message' => 'the category dose not exist',
+                'data' => []
+            ];
+            return response()->json($response);
+        }
         $category->delete();
-        return response()->json('Category deleted successfully');
+        $response = [
+            'status' => true,
+            'message' => 'Category deleted successfully',
+            'data' => []
+        ];
+        return response()->json($response);
     }
 }

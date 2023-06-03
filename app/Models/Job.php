@@ -22,7 +22,6 @@ class Job extends Model
         'delivery_time',
         'status',
         'notic',
-        'connection_token',
     ];
 
     public function user()

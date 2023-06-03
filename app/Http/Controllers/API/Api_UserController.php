@@ -12,6 +12,7 @@ use App\Models\Freelancer_id;
 use App\Models\Freelancer_service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class Api_UserController extends Controller
 {
@@ -19,23 +20,69 @@ class Api_UserController extends Controller
     {
         //$users = User::all();
         $users = User::whereNotIn('role', ['admin', 'superadmin'])->get();
-        return response()->json($users);
+        $response = [
+            'status' => true,
+            'message' => 'you get all users (not admin/auperadmin) successfully',
+            'data' => $users
+        ];
+        return response()->json($response);
     }
     public function admin()
     {
         $admins = User::whereIn('role', ['admin', 'superadmin'])->get();
-        return response()->json($admins);
+        $response = [
+            'status' => true,
+            'message' => 'you get all admin - auperadmin successfully',
+            'data' => $admins
+        ];
+        return response()->json($response);
+    }
+    public function getOneUser(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $response = [
+                'status' => false,
+                'message' => $validator->errors(),
+                'data' => []
+            ];
+            return response()->json($response, 400);
+        }
+        $user = User::where('id', $request->id)->first();
+        if (!$user) {
+            $response = [
+                'status' => false,
+                'message' => 'this user dose not exists',
+                'data' => []
+            ];
+            return response()->json($response, 400);
+        }
+        $response = [
+            'status' => true,
+            'message' => 'you get a one user successfully',
+            'data' => $user
+        ];
+        return response()->json($response, 200);
     }
 
     public function createUser(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'numeric', 'min:10'],
             'password' => ['required', 'min:8'],
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+        if ($validator->fails()) {
+            $response = [
+                'status' => false,
+                'message' => $validator->errors(),
+            ];
+            return response()->json($response, 400);
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -53,20 +100,33 @@ class Api_UserController extends Controller
                 'id_image' => $filename,
             ]);
         }
-
-        return response()->json('User created successfully');
+        $response = [
+            'status' => true,
+            'message' => 'User created successfully',
+            'data' => []
+        ];
+        return response()->json($response);
     }
 
-    public function updateUser(Request $request, $id)
+    // id will come from auth user
+    public function updateUser(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required',
-            'phone_number' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone_number' => ['required', 'numeric', 'min:10'],
+            'password' => ['required', 'min:8'],
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+        if ($validator->fails()) {
+            $response = [
+                'status' => false,
+                'message' => $validator->errors(),
+            ];
+            return response()->json($response, 400);
+        }
 
-        $user = User::findOrFail($id);
+        $user = User::findOrFail(Auth::id());
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -82,31 +142,49 @@ class Api_UserController extends Controller
                 'id_image' => $filename,
             ]);
         }
-
-        return response()->json('User updated successfully');
+        $response = [
+            'status' => true,
+            'message' => 'User updated successfully',
+            'data' => []
+        ];
+        return response()->json($response);
     }
 
     public function new_freelancer(Request $request, $id)
     {
-
-        //return response()->json($request->category_id);
-        $exist_freelancer = Freelancer::where('user_id', $id)->count();
-        /* if ($exist_freelancer == 1) {
-            return response()->json($exist_freelancer);
+        $exist_user = User::where('id', $id)->first();
+        $exist_freelancer = Freelancer::where('user_id', $id)->first();
+        if (!$exist_user) {
+            $response = [
+                'status' => false,
+                'message' => 'the user dose not exist',
+                'data' => []
+            ];
+            return response()->json($response);
+        }
+        if ($exist_freelancer) {
+            $response = [
+                'status' => false,
+                'message' => 'your request is already sended and waiting for accept',
+                'data' => []
+            ];
+            return response()->json($response);
         } else {
-            return response()->json('empty');
-        } */
-        if ($exist_freelancer == 1) {
-            return response()->json('your request is already sended and waiting for accept');
-        } else {
-            $request->validate([
+            $validator = Validator::make($request->all(), [
                 'name' => 'required',
-                'email' => 'required',
-                'phone_number' => 'required',
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'phone_number' => ['required', 'numeric', 'min:10'],
                 'address' => 'required',
                 'category_id' => 'required',
                 //'image.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
+            if ($validator->fails()) {
+                $response = [
+                    'status' => false,
+                    'message' => $validator->errors(),
+                ];
+                return response()->json($response, 400);
+            }
 
             Freelancer::create([
                 'user_id' => $id,
@@ -147,15 +225,43 @@ class Api_UserController extends Controller
                 'role' => 'freelancer',
                 'notic' => $request->notic,
             ]);
-            return response()->json('your request sended successfully');
+            $response = [
+                'status' => true,
+                'message' => 'your request sended successfully',
+                'data' => []
+            ];
+            return response()->json($response);
         }
     }
 
-    public function destroyUser($id)
+    public function destroyUser(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        if ($id != Auth::id()) {
+            $response = [
+                'status' => false,
+                'message' => 'you not allowed to delete user',
+                'data' => []
+            ];
+            return response()->json($response);
+        }
+
+        $user = User::where('id', $id)->first();
+        if (!$user) {
+            $response = [
+                'status' => false,
+                'message' => 'the user dose not exist',
+                'data' => []
+            ];
+            return response()->json($response);
+        }
+        return response()->json($user);
         $user->delete();
 
-        return response()->json('User deleted successfully');
+        $response = [
+            'status' => true,
+            'message' => 'User deleted successfully',
+            'data' => []
+        ];
+        return response()->json($response);
     }
 }

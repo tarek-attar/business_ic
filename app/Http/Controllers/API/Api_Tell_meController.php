@@ -22,18 +22,33 @@ class Api_Tell_meController extends Controller
             $category_names = Category::whereIn('id', $freelancer_services_ids)->pluck('name_ar')->toArray();
             $freelancer->service = $category_names;
         });
-        return response()->json($all_freelancer);
+        $response = [
+            'status' => true,
+            'message' => 'you get all freelancer',
+            'data' => $all_freelancer
+        ];
+        return response()->json($response, 200);
     }
     public function add_new_freelancer_to_tell_me()
     {
         $freelancer_exist = Tell_me::where('user_id', Auth::id())->exists();
         if ($freelancer_exist == true) {
-            return response()->json('freelancer is already exist');
+            $response = [
+                'status' => false,
+                'message' => 'freelancer is already exist',
+                'data' => []
+            ];
+            return response()->json($response, 400);
         }
         $tell_me = Tell_me::create([
             'user_id' => Auth::id(),
         ]);
-        return response()->json('New freelancer added to tell me  successfully');
+        $response = [
+            'status' => true,
+            'message' => 'New freelancer added to tell me  successfully',
+            'data' => []
+        ];
+        return response()->json($response, 200);
     }
     public function update(Request $request)
     {
@@ -56,20 +71,40 @@ class Api_Tell_meController extends Controller
                 'vip' => $request->vip,
                 'note' => $request->note,
             ]);
-            return response()->json('freelancer updated successfully');
+            $response = [
+                'status' => true,
+                'message' => 'freelancer updated successfully',
+                'data' => []
+            ];
+            return response()->json($response, 200);
         }
-        return response()->json('freelancer dose not exist', 400);
+        $response = [
+            'status' => false,
+            'message' => 'freelancer dose not exist',
+            'data' => []
+        ];
+        return response()->json($response, 400);
     }
 
     public function delete()
     {
-        $freelancer_exist = Tell_me::where('user_id', Auth::id())->exists();
-        if ($freelancer_exist == true) {
-            $delete_freelancer = Tell_me::where('user_id', Auth::id())->first();
-            $delete_freelancer->delete();
-            return response()->json('freelancer deleted from tell me successfully');
+        $freelancer_exist = Tell_me::where('user_id', Auth::id())->first();
+        if (!$freelancer_exist) {
+            $response = [
+                'status' => true,
+                'message' => 'freelancer dose not exist',
+                'data' => []
+            ];
+            return response()->json($response, 400);
         }
-        return response()->json('freelancer dose not exist', 400);
+        $delete_freelancer = Tell_me::where('user_id', Auth::id())->first();
+        $delete_freelancer->delete();
+        $response = [
+            'status' => true,
+            'message' => 'freelancer deleted from tell me successfully',
+            'data' => []
+        ];
+        return response()->json($response, 200);
     }
 
     /* public function send_job_message(Request $request)

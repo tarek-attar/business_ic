@@ -17,7 +17,58 @@ class Api_JobController extends Controller
     public function index()
     {
         $jobs = Job::all();
-        return response()->json($jobs);
+        $jobs->each(function ($job) {
+            $job_files = Job_file::where('job_id', $job->id)->pluck('file_name')->toArray();
+            $job->job_files = $job_files;
+        });
+        if ($jobs == null) {
+            $response = [
+                'status' => false,
+                'message' => 'there is no data',
+                'data' => []
+            ];
+            return response()->json($response, 400);
+        }
+        $response = [
+            'status' => true,
+            'message' => 'you get all jobs successfully',
+            'data' => $jobs
+        ];
+        return response()->json($response);
+    }
+
+    public function getOneJob(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $response = [
+                'status' => false,
+                'message' => $validator->errors(),
+                'data' => []
+            ];
+            return response()->json($response, 400);
+        }
+
+        $job = Job::where('id', $request->id)->first();
+        $job_files = Job_file::where('job_id', $job->id)->pluck('file_name')->toArray();
+        $job->job_files = $job_files;
+
+        if ($job == null) {
+            $response = [
+                'status' => false,
+                'message' => 'there is no data',
+                'data' => []
+            ];
+            return response()->json($response, 400);
+        }
+        $response = [
+            'status' => true,
+            'message' => 'you get a one job successfully',
+            'data' => $job
+        ];
+        return response()->json($response, 200);
     }
 
     public function createJop(Request $request)
@@ -37,22 +88,12 @@ class Api_JobController extends Controller
             $response = [
                 'status' => false,
                 'message' => $validator->errors(),
+                'data' => []
             ];
             return response()->json($response, 400);
         }
-        $connect_token = Auth::id() . rand() . time();
-        if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $file) {
-                $filename = rand() . time() . '_' . $file->getClientOriginalName();
-                $file->move(public_path('uploads/job'), $filename);
-                Job_file::create([
-                    'file_name' => $filename,
-                    'connection_token' => $connect_token,
-                ]);
-            }
-        }
 
-        Job::create([
+        $job = Job::create([
             'title_en' => $request->title_en,
             'title_ar' => $request->title_ar,
             'description_en' => $request->description_en,
@@ -62,25 +103,30 @@ class Api_JobController extends Controller
             'category_id' => $request->category_id,
             'delivery_time' => $request->delivery_time,
             'notic' => $request->notic,
-            'connection_token' => $connect_token,
-            //'user_id' => Auth::id(),
-            'user_id' => $request->user_id,
+            'user_id' => Auth::id(),
         ]);
-        return response()->json('User created successfully');
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $file) {
+                $filename = $job->id . '-' . rand() . time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('uploads/job'), $filename);
+                Job_file::create([
+                    'file_name' => $filename,
+                    'job_id' => $job->id,
+                ]);
+            }
+        }
+        $response = [
+            'status' => true,
+            'message' => 'Job created successfully',
+            'data' => []
+        ];
+        return response()->json($response, 200);
     }
-
-    /* public function edit($id)
-    {
-        $job = Job::findOrFail($id);
-        $categories = Category::all();
-        $images = Job_file::where('connection_token', $job->connection_token)->get();
-        return view('admin.jobs.edit', compact('job', 'categories', 'images'));
-    } */
-
 
     public function updateJop(Request $request, $id)
     {
         $job = Job::findOrFail($id);
+
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
             'category_id' => 'required',
@@ -99,18 +145,35 @@ class Api_JobController extends Controller
             $response = [
                 'status' => false,
                 'message' => $validator->errors(),
+                'data' => []
             ];
             return response()->json($response, 400);
         }
-
+        $selectedCheckboxes = $request->input('deleteFile'); // id of image in table job_files
+        if ($selectedCheckboxes) {
+            foreach ($selectedCheckboxes as $value) {
+                $idFilesDelete = Job_file::where('id', $value)->first();
+                if ($idFilesDelete) {
+                    File::delete(public_path('uploads/job/' . $idFilesDelete->file_name));
+                    $idFilesDelete->delete();
+                } else {
+                    $response = [
+                        'status' => false,
+                        'message' => "the file id:$value is not exists to delete",
+                        'data' => []
+                    ];
+                    return response()->json($response, 400);
+                }
+            };
+        }
 
         if ($request->hasFile('image')) {
             foreach ($request->file('image') as $file) {
-                $filename = rand() . time() . '_' . $file->getClientOriginalName();
+                $filename = $job->id . '-' . rand() . time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('uploads/job'), $filename);
                 Job_file::create([
                     'file_name' => $filename,
-                    'connection_token' => $job->connection_token,
+                    'job_id' => $job->id,
                 ]);
             }
         }
@@ -128,28 +191,40 @@ class Api_JobController extends Controller
             'notic' => $request->notic,
             'status' => $request->status,
         ]);
-        $selectedCheckboxes = $request->input('deleteFile'); // id of image in table job_files
-        if ($selectedCheckboxes) {
-            foreach ($selectedCheckboxes as $value) {
-                $idFilesDelete = Job_file::findOrFail($value);
-                File::delete(public_path('uploads/job/' . $idFilesDelete->file_name));
-                $idFilesDelete->delete();
-            };
-        }
-        return response()->json('Job updated successfully');
+
+        $response = [
+            'status' => true,
+            'message' => 'Job updated successfully',
+            'data' => []
+        ];
+        return response()->json($response, 200);
     }
 
-    public function destroyJop(Request $request, $id)
+    public function destroy(Request $request, $id)
     {
-        $job = Job::findOrFail($id);
-        $jobFiles = Job_file::where('connection_token', $job->connection_token)->get();
-        foreach ($jobFiles as $item) {
-            File::delete(public_path('uploads/job/' . $item->file_name));
-        };
-        $job->delete();
-        foreach ($jobFiles as $item) {
-            $item->delete();
-        };
-        return response()->json('Job deleted successfully');
+        $job = Job::where('id', $id)->first();
+        if ($job) {
+            $jobFiles = Job_file::where('job_id', $job->id)->get();
+            foreach ($jobFiles as $item) {
+                File::delete(public_path('uploads/job/' . $item->file_name));
+            };
+            $job->delete();
+            foreach ($jobFiles as $item) {
+                $item->delete();
+            };
+            $response = [
+                'status' => true,
+                'message' => 'Job deleted successfully',
+                'data' => []
+            ];
+            return response()->json($response, 200);
+        }
+        //return response()->json('else', 400);
+        $response = [
+            'status' => false,
+            'message' => 'Job not deleted',
+            'data' => []
+        ];
+        return response()->json($response, 400);
     }
 }

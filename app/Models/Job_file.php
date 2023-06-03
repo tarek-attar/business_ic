@@ -11,7 +11,7 @@ class Job_file extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'file_name',
-        'connection_token',
+        'job_id',
     ];
 
     public function job()
