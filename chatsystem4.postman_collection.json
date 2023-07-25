@@ -1,0 +1,2134 @@
+{
+	"info": {
+		"_postman_id": "4d3bb8f1-66c8-4e0f-b6d8-06ed48a44afa",
+		"name": "chatsystem4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27428478"
+	},
+	"item": [
+		{
+			"name": "Job",
+			"item": [
+				{
+					"name": "get all jobs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "48|Pc1gPEUh5edTJeoV3GhOPLQM3c5YU0SxjaRn7EDE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/job",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"job"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get a job",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "48|Pc1gPEUh5edTJeoV3GhOPLQM3c5YU0SxjaRn7EDE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default"
+								},
+								{
+									"key": "id",
+									"value": "39",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/getOneJob",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"getOneJob"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new job",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "48|Pc1gPEUh5edTJeoV3GhOPLQM3c5YU0SxjaRn7EDE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title_en",
+									"value": "pin",
+									"type": "default"
+								},
+								{
+									"key": "title_ar",
+									"value": "pin",
+									"type": "default"
+								},
+								{
+									"key": "description_en",
+									"value": "i need table",
+									"type": "default"
+								},
+								{
+									"key": "description_ar",
+									"value": "اريد طاولة",
+									"type": "default"
+								},
+								{
+									"key": "price_min",
+									"value": "100",
+									"type": "default"
+								},
+								{
+									"key": "price_max",
+									"value": "150",
+									"type": "default"
+								},
+								{
+									"key": "category_id",
+									"value": "2",
+									"type": "default"
+								},
+								{
+									"key": "delivery_time",
+									"value": "2023-06-26",
+									"type": "default"
+								},
+								{
+									"key": "notic",
+									"value": "اريد الوان باردة",
+									"type": "default"
+								},
+								{
+									"key": "connection_token",
+									"value": "14651595381679610778",
+									"type": "default"
+								},
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "image[]",
+									"type": "file",
+									"src": "/C:/Users/lenovo/Desktop/image/firstPageImage.png"
+								},
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default"
+								},
+								{
+									"key": "image[]",
+									"type": "file",
+									"src": "/C:/Users/lenovo/Desktop/image/firstPageImage.png"
+								},
+								{
+									"key": "job_id",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/job/createJop",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"job",
+								"createJop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update job",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "50|r3jJYiqLABQopqbzd8F04XXgb2sR4aZCZAy42CFj",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accep",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title_en",
+									"value": "pin2223",
+									"type": "default"
+								},
+								{
+									"key": "title_ar",
+									"value": "pin22223",
+									"type": "default"
+								},
+								{
+									"key": "description_en",
+									"value": "i need table",
+									"type": "default"
+								},
+								{
+									"key": "description_ar",
+									"value": "اريد طاولة",
+									"type": "default"
+								},
+								{
+									"key": "price_min",
+									"value": "100",
+									"type": "default"
+								},
+								{
+									"key": "price_max",
+									"value": "150",
+									"type": "default"
+								},
+								{
+									"key": "category_id",
+									"value": "2",
+									"type": "default"
+								},
+								{
+									"key": "delivery_time",
+									"value": "2023-06-26",
+									"type": "default"
+								},
+								{
+									"key": "notic",
+									"value": "اريد الوان باردة",
+									"type": "default"
+								},
+								{
+									"key": "connection_token",
+									"value": "14651595381679610778",
+									"type": "default"
+								},
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "image[]",
+									"type": "file",
+									"src": [
+										"/C:/Users/lenovo/Desktop/airpod.png",
+										"/C:/Users/lenovo/Desktop/camera.png"
+									]
+								},
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default"
+								},
+								{
+									"key": "deleteFile[]",
+									"value": "41",
+									"description": "put exist id image",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "deleteFile[]",
+									"value": "42",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/job/updateJop/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"job",
+								"updateJop",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy job",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "50|r3jJYiqLABQopqbzd8F04XXgb2sR4aZCZAy42CFj",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/job/destroyJop/10?api_password=fdwfeasdfewfsafwef23243f43",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"job",
+								"destroyJop",
+								"10"
+							],
+							"query": [
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "All users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "48|Pc1gPEUh5edTJeoV3GhOPLQM3c5YU0SxjaRn7EDE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "48|Pc1gPEUh5edTJeoV3GhOPLQM3c5YU0SxjaRn7EDE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOneUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "48|Pc1gPEUh5edTJeoV3GhOPLQM3c5YU0SxjaRn7EDE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default"
+								},
+								{
+									"key": "id",
+									"value": "36",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/getOneUser",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"getOneUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "48|Pc1gPEUh5edTJeoV3GhOPLQM3c5YU0SxjaRn7EDE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "julia2",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "julia2@yahoo.com",
+									"type": "default"
+								},
+								{
+									"key": "phone_number",
+									"value": "0590000015533112",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "1111111111",
+									"type": "default"
+								},
+								{
+									"key": "notic",
+									"value": "***",
+									"type": "default"
+								},
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default"
+								},
+								{
+									"key": "id_image",
+									"type": "file",
+									"src": "/C:/Users/lenovo/Desktop/class.png"
+								},
+								{
+									"key": "user_image",
+									"type": "file",
+									"src": "/C:/Users/lenovo/Desktop/imagews.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/createUser",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"createUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "50|r3jJYiqLABQopqbzd8F04XXgb2sR4aZCZAy42CFj",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "merkal",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "merkal@yahoo.com",
+									"type": "default"
+								},
+								{
+									"key": "phone_number",
+									"value": "05900000001",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "1111111111",
+									"type": "default"
+								},
+								{
+									"key": "notic",
+									"value": "new user",
+									"type": "default"
+								},
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default"
+								},
+								{
+									"key": "id_image",
+									"type": "file",
+									"src": "/C:/Users/lenovo/Desktop/car1.jpeg"
+								},
+								{
+									"key": "user_image",
+									"type": "file",
+									"src": "/C:/Users/lenovo/Desktop/car2.jpeg"
+								},
+								{
+									"key": "user_id",
+									"value": "36",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/updateUser",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"updateUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "50|r3jJYiqLABQopqbzd8F04XXgb2sR4aZCZAy42CFj",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/destroyUser/12?api_password=fdwfeasdfewfsafwef23243f43",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"destroyUser",
+								"12"
+							],
+							"query": [
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"description": " the delete done if user want to delete his profile"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Freelancer",
+			"item": [
+				{
+					"name": "new freelancer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "50|r3jJYiqLABQopqbzd8F04XXgb2sR4aZCZAy42CFj",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Acce",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "new",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "newwwwww@yahoo.com",
+									"type": "default"
+								},
+								{
+									"key": "phone_number",
+									"value": "0590000012",
+									"type": "default"
+								},
+								{
+									"key": "address",
+									"value": "gaza-gaza",
+									"type": "default"
+								},
+								{
+									"key": "notic",
+									"value": "new",
+									"type": "default"
+								},
+								{
+									"key": "category_id[]",
+									"value": "1 ",
+									"type": "default"
+								},
+								{
+									"key": "category_id[]",
+									"value": "2",
+									"type": "default"
+								},
+								{
+									"key": "category_id[]",
+									"value": "3",
+									"type": "default"
+								},
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/new_freelancer/21",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"new_freelancer",
+								"21"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "all category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "50|r3jJYiqLABQopqbzd8F04XXgb2sR4aZCZAy42CFj",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default"
+								},
+								{
+									"key": "user_id",
+									"value": "1 or 2 now",
+									"description": "should be id for admin",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/category",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "50|r3jJYiqLABQopqbzd8F04XXgb2sR4aZCZAy42CFj",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name_en",
+									"value": "3D print233333ee",
+									"type": "default"
+								},
+								{
+									"key": "name_ar",
+									"value": "طباعة ثلاثية الابعاد2ee",
+									"type": "default"
+								},
+								{
+									"key": "notic",
+									"value": "كافة الأشكال",
+									"type": "default"
+								},
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/category/createCategory",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"category",
+								"createCategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "50|r3jJYiqLABQopqbzd8F04XXgb2sR4aZCZAy42CFj",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name_en",
+									"value": "1D print 1112",
+									"type": "default"
+								},
+								{
+									"key": "name_ar",
+									"value": "طباعة ثلاثية الابعاد",
+									"type": "default"
+								},
+								{
+									"key": "notic",
+									"value": "كافة الأشكال",
+									"type": "default"
+								},
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/category/updateCategory/8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"category",
+								"updateCategory",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "50|r3jJYiqLABQopqbzd8F04XXgb2sR4aZCZAy42CFj",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/category/destroyCategory/19",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"category",
+								"destroyCategory",
+								"19"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gallery",
+			"item": [
+				{
+					"name": "all gallery",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "51|XVU3JHWMVYqWEAYWvLTGa4tkVZP4RWAXct3YZkJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/gallery",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"gallery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create gallery",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "51|XVU3JHWMVYqWEAYWvLTGa4tkVZP4RWAXct3YZkJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "text"
+								},
+								{
+									"key": "title_en",
+									"value": "door2222",
+									"type": "text"
+								},
+								{
+									"key": "title_ar",
+									"value": "باب22222",
+									"type": "text"
+								},
+								{
+									"key": "description_en",
+									"value": "door22",
+									"type": "text"
+								},
+								{
+									"key": "description_ar",
+									"value": "باب222",
+									"type": "text"
+								},
+								{
+									"key": "minimized_picture",
+									"type": "file",
+									"src": "/C:/Users/lenovo/Desktop/camera.png"
+								},
+								{
+									"key": "image[]",
+									"type": "file",
+									"src": "/C:/Users/lenovo/Desktop/2_195537-768x535.jpg"
+								},
+								{
+									"key": "image[]",
+									"type": "file",
+									"src": "/C:/Users/lenovo/Desktop/airpod.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/gallery/createGallery",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"gallery",
+								"createGallery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update gallery",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "51|XVU3JHWMVYqWEAYWvLTGa4tkVZP4RWAXct3YZkJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "text"
+								},
+								{
+									"key": "title_en",
+									"value": "glassee",
+									"type": "text"
+								},
+								{
+									"key": "title_ar",
+									"value": "eeeeesaبيسثقبلقل",
+									"type": "text"
+								},
+								{
+									"key": "description_en",
+									"value": "door22",
+									"type": "text"
+								},
+								{
+									"key": "description_ar",
+									"value": "باب222",
+									"type": "text"
+								},
+								{
+									"key": "minimized_picture",
+									"type": "file",
+									"src": "/C:/Users/lenovo/Desktop/Flag_of_Palestine.png"
+								},
+								{
+									"key": "deleteFile[]",
+									"value": "11",
+									"description": "send exist id image",
+									"type": "text"
+								},
+								{
+									"key": "image[]",
+									"type": "file",
+									"src": "/C:/Users/lenovo/Desktop/Flag_of_Palestine.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/gallery/updateGallery/18",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"gallery",
+								"updateGallery",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy gallery",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "51|XVU3JHWMVYqWEAYWvLTGa4tkVZP4RWAXct3YZkJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/gallery/destroyGallery/18?api_password=fdwfeasdfewfsafwef23243f43",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"gallery",
+								"destroyGallery",
+								"18"
+							],
+							"query": [
+								{
+									"key": "api_password",
+									"value": "fdwfeasdfewfsafwef23243f43"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login / register",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "tarek2235",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "diana@yahoo.com",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "111111111",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "34|udduZGdpDsq11ZFlVh6wwQKHoHeXXOlB92SoI4rX",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "tarek2235",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "opera@yahoo.com",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "111111111",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/logout",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "opera",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "opera@yahoo.com",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "111111111",
+									"type": "default"
+								},
+								{
+									"key": "confirm_password",
+									"value": "111111111",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "chat",
+			"item": [
+				{
+					"name": "start Texting",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "47|bO1tWZuredtgNasW4akdeAhAFp9ffZVgJ0enwm2u",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/chat/startTexting",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								"startTexting"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "start Texting Technical Support",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "47|bO1tWZuredtgNasW4akdeAhAFp9ffZVgJ0enwm2u",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"description": "لا تدخل ادمن او سوبر ادمن توكين",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/chat/startTextingTechnicalSupport",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								"startTextingTechnicalSupport"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create room",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "47|bO1tWZuredtgNasW4akdeAhAFp9ffZVgJ0enwm2u",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "work",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/chat/createRoom",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								"createRoom"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rooms for every user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "43|0r6jT9NJnIFmrGIlvSORifSoAf399n6t69soZocq",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/rooms",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"rooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Participant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "34|udduZGdpDsq11ZFlVh6wwQKHoHeXXOlB92SoI4rX",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "room_id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/chat/addParticipant",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								"addParticipant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove Participant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "34|udduZGdpDsq11ZFlVh6wwQKHoHeXXOlB92SoI4rX",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "room_id",
+									"value": "41",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/chat/removeParticipant",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								"removeParticipant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "room Messages",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "40|tqPR9Pr1hzz9HTMdua5Z6XCTuMzNw9AVSO5P74t1",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "room_id",
+									"value": "42",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/chat/messages",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new Message",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "41|x3MGO9dwIsvu4GObPifyn0wzSazts2nLzdNkRa9Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "room_id",
+									"value": "45",
+									"type": "text"
+								},
+								{
+									"key": "message",
+									"type": "file",
+									"src": "/C:/Users/lenovo/Desktop/image/123.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/chat/newMessage",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								"newMessage"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tell-Me",
+			"item": [
+				{
+					"name": "add freelancer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "51|XVU3JHWMVYqWEAYWvLTGa4tkVZP4RWAXct3YZkJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/tellme/add",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tellme",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show all freelancer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "45|KXdWxPtMvFCvadybfB77b0AwLWm0RqZRUl8G4NML",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/tellme/show",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tellme",
+								"show"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update freelancer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "46|dXdBk3TRBucpsGqcseiLRKlg0ewAHA5aNHpYtJJc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "vip",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "note",
+									"value": "super freelancer",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/tellme/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tellme",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete freelancer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "45|KXdWxPtMvFCvadybfB77b0AwLWm0RqZRUl8G4NML",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/tellme/delete",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tellme",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

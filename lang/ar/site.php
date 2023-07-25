@@ -98,6 +98,8 @@ return [
     'Canceled' => 'ملغي',
     'Notic' => 'ملاحظات',
 
+    'Number of Freelancer' => 'عدد الفريلانسر',
+    'Freelancer' => 'الفريلانسر',
 
 ];
 
